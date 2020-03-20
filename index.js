@@ -22,7 +22,7 @@ function success(pos) {
 	var radLat = pos.coords.latitude * Math.PI / 180;
 	var circle = 6371009 * 2 * Math.PI * Math.cos(radLat);
 	var frac = 15000 / circle * 360;
-	var c2 = SMap.Coords.fromWGS84(coords.longitude + frac, coords.latitude);
+	var c2 = SMap.Coords.fromWGS84(pos.coords.longitude + frac, pos.coords.latitude);
 	var cz = m.computeCenterZoom([center, c2], true);
 
 	m.setCenterZoom(coords, Math.min(cz[1] - 1, 18));
