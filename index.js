@@ -18,8 +18,9 @@ function success(pos) {
 
 	var marker = new SMap.Marker(coords, "myMarker", {});
 	layer.addMarker(marker);
+	m.setCenter(coords);
 
-	console.log(`Plus minus ${crd.accuracy} metrů.`);
+	console.log(`Plus minus ${pos.coords.accuracy} metrů.`);
 }
 
 function error(err) {
@@ -27,9 +28,3 @@ function error(err) {
 }
 
 navigator.geolocation.getCurrentPosition(success, error, options);
-
-/*
-var options = {};
-var marker = new SMap.Marker(center, "myMarker", options);
-layer.addMarker(marker);
-*/
