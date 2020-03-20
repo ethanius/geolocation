@@ -8,18 +8,18 @@ m.addLayer(layer);
 layer.enable();
 
 var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
+	enableHighAccuracy: true,
+	timeout: 5000,
+	maximumAge: 0
 };
 
 function success(pos) {
-  var crd = pos.coords;
+	var coords = SMap.Coords.fromWGS84(pos.coords.longitude, pos.coords.latitude);
 
-  console.log('Your current position is:');
-  console.log(`Latitude : ${crd.latitude}`);
-  console.log(`Longitude: ${crd.longitude}`);
-  console.log(`More or less ${crd.accuracy} meters.`);
+	var marker = new SMap.Marker(coords, "myMarker", {});
+	layer.addMarker(marker);
+
+	console.log(`Plus minus ${crd.accuracy} metrů.`);
 }
 
 function error(err) {
