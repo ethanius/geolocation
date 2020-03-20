@@ -16,9 +16,16 @@ var options = {
 function success(pos) {
 	var coords = SMap.Coords.fromWGS84(pos.coords.longitude, pos.coords.latitude);
 
-	var marker = new SMap.Marker(coords, "myMarker", {});
+	var marker = new SMap.Marker(coords, undefined, {});
 	layer.addMarker(marker);
-	m.setCenter(coords);
+
+	var radLat = pos.coords.latitude * Math.PI / 180;
+	var circle = 6371009 * 2 * Math.PI * Math.cos(radLat);
+	var frac = 15000 / circle * 360;
+	var c2 = Scene.coordsFromWGS84(coords.longitude + frac, coords.latitude);
+	var cz = Scene.computeCenterZoom([center, c2], true);
+
+	Scene.setCenterZoom(coords, Math.min(cz[1] - 1, 18));
 
 	console.log(`Plus minus ${pos.coords.accuracy} metrů.`);
 }
